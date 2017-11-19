@@ -9,13 +9,13 @@ if ! [ -x "$(command -v docker)" ]; then
 fi
 
 # build image
-docker build --tag geth .
+docker build --tag geth-rinkeby .
 
 # remove existing container if necessary
-GETH_EXISTS=$(docker ps -a --format "{{.Names}}" | grep ^geth$)
-if [[ ! -z $GETH_EXISTS ]]; then
-  docker stop geth
-  docker rm geth
+GETH_RINKEBY_EXISTS=$(docker ps -a --format "{{.Names}}" | grep ^geth-rinkeby$)
+if [[ ! -z $GETH_RINKEBY_EXISTS ]]; then
+  docker stop geth-rinkeby
+  docker rm geth-rinkeby
 fi
 
 # run local geth container
@@ -23,5 +23,5 @@ docker run \
   --detach \
   --restart always \
   --publish 8545:8545 \
-  --name geth \
-  geth
+  --name geth-rinkeby \
+  geth-rinkeby
